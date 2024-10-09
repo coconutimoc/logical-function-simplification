@@ -11,7 +11,7 @@ def expression_to_table(expression:str) -> list:
 
     variable_amount = len(_variables)
 
-    for minterm in range(0,np.pow(2,variable_amount)):
+    for minterm in range(0,np.power(2,variable_amount)):
 
         _expression = expression
 
@@ -21,7 +21,7 @@ def expression_to_table(expression:str) -> list:
 
             #substitude variables with bools
             v = _variables[variable]
-            _expression = _expression.replace(v,str((minterm // int(np.pow(2,variable_amount - variable - 1))) % 2))
+            _expression = _expression.replace(v,str((minterm // int(np.power(2,variable_amount - variable - 1))) % 2))
             variable += 1
 
         #substitude "+" with "or"
@@ -60,7 +60,7 @@ def variables(expression:str=None,truth_table:list=[]) -> list:
 
         for _variable in range(1,_variable_amount + 1):
 
-            self._variables.append(f"A{_variable}")
+            _variables.append(f"A{_variable}")
 
     return _variables
 

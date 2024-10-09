@@ -8,7 +8,7 @@ class logical_function:
     def __init__(self,expression:str=None,truth_table:list=[]):
 
         #raise error if input is legal
-        assert expression == None or truth_table == [], "Error: initialize a logical function with no attributes."
+        assert expression != None or truth_table != [], "Error: initialize a logical function with no attributes."
 
         assert expression == None  or truth_table == [], "Error: should initialize with only one attribute."
 
@@ -16,7 +16,7 @@ class logical_function:
 
         while check > 1:
 
-            assert check % 2 == 1, "Error: table length should be exponential of two."
+            assert check % 2 == 0, "Error: table length should be exponential of two."
 
             check = check // 2
 
@@ -36,7 +36,7 @@ class logical_function:
 
             self.truth_table = truth_table
            
-            self.variables = _init_class.variables(truth_table)
+            self.variables = _init_class.variables(truth_table=truth_table)
 
             self.expression = self.simplify()
 
@@ -47,15 +47,15 @@ class logical_function:
 
         minterms = []
 
-        for minterm in range(0,int(np.pow(2,len(self.variables)))):
+        for minterm in range(0,int(np.power(2,len(self.variables)))):
 
             check = 1
 
             for pos in range(1,len(self.variables)+1):
 
-                if (implicant // np.pow(3,len(self.variables)-pos)) % 3!=2:
+                if (implicant // np.power(3,len(self.variables)-pos)) % 3!=2:
 
-                    if (minterm >> (len(self.variables) - pos))%2 != (implicant // np.pow(3,len(self.variables)-pos)) % 3:
+                    if (minterm >> (len(self.variables) - pos))%2 != (implicant // np.power(3,len(self.variables)-pos)) % 3:
                         
                         check *= 0 
 
@@ -151,11 +151,11 @@ class logical_function:
 
             for pos in range(1,len(self.variables)+1):
 
-                if (implicant // np.pow(3,len(self.variables)-pos) )% 3 ==  0:
+                if (implicant // np.power(3,len(self.variables)-pos) )% 3 ==  0:
 
                     simplest_expression += f"not({self.variables[pos-1]})*"
 
-                elif (implicant//np.pow(3,len(self.variables)-pos))%3 == 1:
+                elif (implicant//np.power(3,len(self.variables)-pos))%3 == 1:
 
                     simplest_expression += f"{self.variables[pos-1]}*"
 
